@@ -4,7 +4,7 @@ This repo contains the source code of our dashboard.
 
 ## Example
 
-<img style="max-width:100%; height: auto" src="https://lh4.googleusercontent.com/uSv3nr5lLKxincVn6T8_RSSZfbZL6yvD1fRXuc82Yyu0fVysk-sr78rud_zXp40jL11TQZDx6KSrtw-igLhN=w3232-h1896-rw">
+<img style="max-width:100%; height: auto" src="https://raw.githubusercontent.com/phuongdm1987/dashboard.spatie.be/master/public/images/screenshot-min.png">
 
 ## Author
 
