@@ -19,9 +19,14 @@
             </div>
             <div></div>
         </div>
-        <div class="abs_xws text-xs" v-if="leaveToDay !== false">
-            <span>Leave <leave-status :status="leaveToDay" /></span>
-            <span v-if="leaveTomorrow !== false">& <leave-status :status="leaveTomorrow" :label="'tomorrow'" /></span>
+        <div class="abs_xws text-xs" v-if="leaveToDay || leaveTomorrow">
+            <div v-if="leaveToDay">
+                <span>Leave <leave-status :status="leaveToDay" :label="'today'" /></span>
+                <span v-if="leaveTomorrow">& <leave-status :status="leaveTomorrow" :label="'tomorrow'" /></span>
+            </div>
+            <div v-else>
+                <span>Leave <leave-status :status="leaveTomorrow" :label="'tomorrow'" /></span>
+            </div>            
         </div>
     </tile>
 </template>
