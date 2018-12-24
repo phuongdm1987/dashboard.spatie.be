@@ -65,13 +65,24 @@ class LeaveRequest
         $index = 0;
         $max = 5;
         $now = (new \DateTime())->format('Y-m-d');
+        $flagCancelled = false;
         while(!$body->eof()) {
             $index++;
             $line = readline($body);
 
             if ($index < 180) continue; //skip html begining
+            
+            if (strpos($line, 'role="status"') && !strpos($nextLine = readLine($body), 'Approved')) {
+                print_r("Request is not approved \n");
+                $flagCancelled = true;
+            }
+            
             if (!strpos($line, '"leave-time"')) continue;
-
+            if ($flagCancelled) {
+                $flagCancelled = false;
+                continue;
+            }            
+            
             //date
             $nextLine = readline($body);
             $half = null;

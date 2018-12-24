@@ -18,7 +18,7 @@ export default {
             let [date, half] = request.split(' ');
             
             if (date === targetDate) {
-                return half === 'undefined' ? 'FULL' : half;
+                return typeof half === 'undefined' ? 'FULL' : half;
             }
         }
 
