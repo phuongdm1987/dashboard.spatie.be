@@ -73,7 +73,7 @@ class Auth
                 'Cookie' => 'session='.$session,
                 'Host' => 'stafftool.coccoc.com',
                 'Upgrade-Insecure-Requests' => 1,
-                'User-Agent' => 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.110 Safari/537.36',
+                'User-Agent' => env('STAFF_USER_AGENT', ''),
             ]
         ];
     }
