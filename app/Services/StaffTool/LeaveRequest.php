@@ -76,7 +76,7 @@ class LeaveRequest
                 print_r("Request is not approved \n");
                 $flagCancelled = true;
             }
-            
+
             if (!strpos($line, '"leave-time"')) continue;
             if ($flagCancelled) {
                 $flagCancelled = false;
@@ -84,20 +84,28 @@ class LeaveRequest
             }            
             
             //date
-            $nextLine = readline($body);
-            $half = null;
+            $endOfRow = false;
+            while(!$endOfRow) {
+                $nextLine = readline($body);
 
-            if (strpos($nextLine, 'morning')) $half = 'AM';
-            if (strpos($nextLine, 'afternoon')) $half = 'PM';
+                if (strpos($nextLine, '</td>') !== FALSE) {
+                    $endOfRow = true;
+                    break;
+                }
 
-            $date = trim(str_replace(
-                ['&nbsp;', 'from', 'to', '(all day)', '(afternoon)', '(morning)'],
-                '',
-                strip_tags($nextLine)
-            ));
+                $half = null;
+                if (strpos($nextLine, 'morning')) $half = 'AM';
+                if (strpos($nextLine, 'afternoon')) $half = 'PM';
 
-            if ($date >= $now) {
-                $requests = array_merge($requests, $this->parseDate($date, $half));
+                $date = trim(str_replace(
+                    ['&nbsp;', 'from', 'to', '(all day)', '(afternoon)', '(morning)'],
+                    '',
+                    strip_tags($nextLine)
+                ));
+
+                if ($date >= $now) {
+                    $requests = array_merge($requests, $this->parseDate($date, $half));
+                }
             }
 
             if (count($requests) >= $max) break;
