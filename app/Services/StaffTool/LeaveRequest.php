@@ -97,14 +97,18 @@ class LeaveRequest
                 if (strpos($nextLine, 'morning')) $half = 'AM';
                 if (strpos($nextLine, 'afternoon')) $half = 'PM';
 
-                $date = trim(str_replace(
+                $strPattern = trim(str_replace(
                     ['&nbsp;', 'from', 'to', '(all day)', '(afternoon)', '(morning)'],
                     '',
                     strip_tags($nextLine)
                 ));
 
-                if ($date >= $now) {
-                    $requests = array_merge($requests, $this->parseDate($date, $half));
+                $dates = $this->parseDate($strPattern, $half);
+
+                foreach($dates as $date) {
+                    if ($date >= $now) {
+                        array_push($requests, $date);
+                    }
                 }
             }
 
