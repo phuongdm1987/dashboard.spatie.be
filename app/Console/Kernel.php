@@ -35,6 +35,7 @@ class Kernel extends ConsoleKernel
         // $schedule->command(FetchPackagistTotalsCommand::class)->hourly();
         $schedule->command(FetchJiraUsersCommand::class)->everyFiveMinutes();
         $schedule->command(FetchLeaveRequestCommand::class)->weekdays()->hourly()->between('7:00', '20:00');
+        $schedule->command(FetchLeaveRequestCommand::class)->weekends()->twiceDaily(8, 20);
         $schedule->command('websockets:clean')->daily();
 
     }
